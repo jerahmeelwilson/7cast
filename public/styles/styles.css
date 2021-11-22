@@ -1,0 +1,45 @@
+body {
+  text-align: center;
+}
+
+main {
+  width: 90%;
+  margin: 0 auto;
+}
+
+#city-name {
+  font-weight: bold;
+}
+
+#mainCard {
+  display: flex;
+  margin-top: 20px;
+  justify-content: space-between;
+}
+#details {
+  text-align: justify;
+}
+
+sup {
+  vertical-align: super;
+  font-size: smaller;
+  line-height: normal;
+}
+.detailLine {
+  display: flex;
+  justify-content: space-between;
+}
+
+.detailLine p {
+  margin-left: 10px;
+}
+
+#days {
+  justify-content: space-between;
+}
+
+.daycast {
+  text-align: center;
+  width: 60%;
+  margin: 0 auto;
+}
