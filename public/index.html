@@ -5,92 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>7 Cast</title>
-    <link rel="stylesheet" href="styles/reset.css" />
     <link rel="stylesheet" href="styles/styles.css" />
   </head>
   <body>
-    <h1 id="city-name">Lafayette</h1>
-    <h2>datetime</h2>
     <main>
-      <section id="mainCard">
-        <div id="mainDisplay">
-          <div>Monday</div>
-          <div>Nov 22</div>
-          <div id="temp">36<sup>°F</sup></div>
-          <div id="desc">Clear Skys</div>
-          <img
-            src="http://openweathermap.org/img/wn/01d@2x.png"
-            alt="weather description icon"
-          />
-        </div>
-        <div id="details">
-          <ul>
-            <li class="detailLine">
-              Sunrise:
-              <p>7:00 AM</p>
-            </li>
-            <li class="detailLine">
-              Sunset:
-              <p>5:00 PM</p>
-            </li>
-            <li>
-            <li class="detailLine">
-                Temp:
-                <p>30<sup>°F</sup></p>
-            </li>
-            <li class="detailLine">
-                Feels like:
-                <p>30<sup>°F</sup></p>
-            </li>
-            <li class="detailLine">
-                Low:
-                <p>26<sup>°F</sup></p>
-            </li>
-            <li class="detailLine">
-                High:
-                <p>27<sup>°F</sup></p>
-            </li>
-            </li>
-            <li class="detailLine">
-              Wind Speed:
-              <p>1.6 mph</p>
-            </li>
-          </ul>
-        </div>
+      <h1 id="cityName"></h1>
+      <h2 id="coords"></h2>
+      <section id="currentDay">
+        <h1 id="mainDay"></h1>
+        <h2 id="day"></h2>
+        <p id="mainTemp"></p>
+        <p id="desc"></p>
+        <img id="descImage  " src="" alt="" />
       </section>
-      <section id="days">
-        <div class="daycast">
-          <h4>Tue 23</h4>
-          <p>37<sup>°F</sup></p>
-          <img src="http://openweathermap.org/img/wn/02d@2x.png" alt="" />
-        </div>
-        <div class="daycast">
-          <h4>Wed 24</h4>
-          <p>37<sup>°F</sup></p>
-          <img src="http://openweathermap.org/img/wn/02d@2x.png" alt="" />
-        </div>
-        <div class="daycast">
-          <h4>Thu 26</h4>
-          <p>37<sup>°F</sup></p>
-          <img src="http://openweathermap.org/img/wn/02d@2x.png" alt="" />
-        </div>
-        <div class="daycast">
-          <h4>Fri 27</h4>
-          <p>37<sup>°F</sup></p>
-          <img src="http://openweathermap.org/img/wn/02d@2x.png" alt="" />
-        </div>
-        <div class="daycast">
-          <h4>Sat 28</h4>
-          <p>37<sup>°F</sup></p>
-          <img src="http://openweathermap.org/img/wn/02d@2x.png" alt="" />
-        </div>
-        <div class="daycast">
-          <h4>Sun 29</h4>
-          <p>37<sup>°F</sup></p>
-          <img src="http://openweathermap.org/img/wn/02d@2x.png" alt="" />
-        </div>
-      </section>
+      <section id="details"></section>
+      <section id="hourly"></section>
+      <section id="daily"></section>
     </main>
     <script src="script.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </body>
 </html>
