@@ -6,23 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>7 Cast</title>
     <link rel="stylesheet" href="styles/styles.css" />
+    <script
+      async
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDauDWlprJ8yuKXKjnxMfKeYVnBlXPoPA&libraries=places"
+    ></script>
+    <script defer src="script.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <main>
-      <h1 id="cityName"></h1>
-      <h2 id="coords"></h2>
-      <section id="currentDay">
-        <h1 id="mainDay"></h1>
-        <h2 id="day"></h2>
-        <p id="mainTemp"></p>
-        <p id="desc"></p>
-        <img id="descImage  " src="" alt="" />
+      <header>
+        <nav>
+          <h1>7 cast</h1>
+          <input
+            class="city-search"
+            type="text"
+            placeholder="Enter a Location"
+            data-city-search
+          />
+        </nav>
+      </header>
+      <section id="cityCards">
+        <div></div>
       </section>
-      <section id="details"></section>
-      <section id="hourly"></section>
-      <section id="daily"></section>
+      <footer></footer>
     </main>
-    <script src="script.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </body>
 </html>

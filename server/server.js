@@ -4,12 +4,18 @@ const app = express();
 const cors = require("cors");
 const { SERVER_PORT } = process.env;
 
-const { currentCity, currentCityOneCall } = require("./controller.js");
+const { cityOneCall } = require("./controller.js");
+const { seed, getCities, addCity, deleteCity } = require("./db");
 
 app.use(express.json());
 app.use(cors());
 
-app.get("/api/currentCity/:latitude/:longitude",currentCity)
-app.get("/api/currentCity/onecall/:latitude/:longitude",currentCityOneCall)
+app.post("/seed", seed);
+
+app.get("/api/Cities", getCities);
+app.post("/api/addCity", addCity);
+app.delete("/api/deleteCity/:id", deleteCity);
+
+app.get("/api/City/onecall/:latitude/:longitude", cityOneCall);
 
 app.listen(SERVER_PORT, () => console.log(`up on ${SERVER_PORT}`));
