@@ -26,6 +26,7 @@ searchBox.addListener("places_changed", () => {
     .post("http://localhost:4004/api/addCity", newCity)
     .then(() => {
       getCities();
+      citySearch.value = "";
     })
     .catch((err) => {
       console.log(err);
@@ -49,26 +50,30 @@ function getCities() {
           let temp_max = Math.round(onecallData.data.daily[0].temp.max);
           let place_id = city.place_id;
           let cityCard = `
-        <div class='city-card'>
+          <div class='city-card'>
           <img src =${city.photo} width ="250" height = "250">
           <p>${city.name}</p> <span>${currentWeather}</span>
           <p>Low: ${temp_min}°</p>${current_temp}°</p><p>${temp_max}°</p>
+          <a>
           <button class="delbtn" id ="${place_id}">X</button>
-        </div>     
+          </div>     
         `;
           cityCards.innerHTML += cityCard;
+          let delbtns = document.querySelectorAll(".delbtn");
+          delbtns.forEach((btn) => {
+            btn.addEventListener("click", deleteCity);
+          });
         });
     });
   });
 }
 
-function deleteCity() {
+function deleteCity(e) {
   e.preventDefault();
-  console.log("hello");
-  //   // axios
-  //   //   .delete(`http://localhost:4004/deleteCity/${place_id}`)
-  //   //   .then(() => getCities())
-  //   //   .catch((err) => console.log(err));
+  axios
+    .delete(`http://localhost:4004/api/deleteCity/${e.target.id}`)
+    .then(() => getCities())
+    .catch((err) => console.log(err));
 }
 
 getCities();

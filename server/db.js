@@ -56,7 +56,7 @@ module.exports = {
     sequelize
       .query(
         `delete from cities 
-          where place_id = ${id}
+          where place_id = '${id}';
       `
       )
       .then((dbRes) => res.status(200).send(dbRes[0]))
