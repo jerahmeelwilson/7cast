@@ -84,12 +84,13 @@ nav {
 .main-temp {
   font-size: 3em;
   margin: 0;
+  padding-left: 0.4em;
 }
 
 .card-bottom {
   display: flex;
   justify-content: space-between;
-  margin-top: 0.5em;
+  margin-top: 0.8em;
   margin-bottom: 0.8em;
   margin-right: 0.5em;
 }
@@ -139,9 +140,9 @@ nav {
 
 .modal {
   position: relative;
-  background-color: white;
+  background-color: rgb(241, 250, 238);
   width: 30%;
-  height: 30%;
+  border-radius: 10px;
 }
 
 .modal-close {

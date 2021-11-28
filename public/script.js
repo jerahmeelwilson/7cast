@@ -44,7 +44,7 @@ function getCities() {
           `http://localhost:4004/api/City/onecall/${city.latitude}/${city.longitude}`
         )
         .then((onecallData) => {
-          //console.log(onecallData.data);
+          console.log(onecallData.data);
           let currentWeather = onecallData.data.current.weather[0].main;
           let temp_min = Math.round(onecallData.data.daily[0].temp.min);
           let current_temp = Math.round(onecallData.data.current.temp);
@@ -66,9 +66,17 @@ function getCities() {
           </div>
           <br />    
         `;
+          let daily = onecallData.data.daily;
+          let dailyHTML = "";
+          daily.forEach((day) => {
+            dailyHTML += `<div>
+              <h5>${dtConvert(day.dt)}</h5> <p>${day.weather[0].description}</p>
+            </div>`;
+          });
           let modal = `
            <div class = "modal ${place_id}">
-            <p>${city.name}</p>
+            <h5>${city.name}</h5>
+            ${dailyHTML}
             <span class = "modal-close">X</span>
            </div>
         `;
@@ -106,6 +114,11 @@ function deleteCity(e) {
     .delete(`http://localhost:4004/api/deleteCity/${e.target.id}`)
     .then(() => getCities())
     .catch((err) => console.log(err));
+}
+
+function dtConvert(dt) {
+  let date = new Date(dt * 1000);
+  return `${date.getMonth(date) + 1}/${date.getDate(date) + 1} `;
 }
 
 getCities();
