@@ -1,0 +1,105 @@
+html {
+  box-sizing: border-box;
+}
+
+html:after {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: hsla(180, 0%, 50%, 0.25);
+  pointer-events: none;
+}
+
+body {
+  background-image: url("../images/noaa-0ETSZYPjvDo-unsplash.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+h1 {
+  margin: 0;
+  color: white;
+  padding-left: 1em;
+}
+nav {
+  display: flex;
+}
+
+.city-search {
+  display: block;
+  margin: 0 auto;
+  min-width: 25%;
+  font-size: 1em;
+  border: 2px solid black;
+  border-radius: 4px;
+  background-color: rgb(241, 250, 238, 0.1);
+  color: white;
+}
+
+#cityCards {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.city-card {
+  border: 1px solid black;
+  margin: 2em;
+  border-radius: 10px;
+  background-color: rgb(241, 250, 238, 0.7);
+}
+
+.card-img {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.card-title {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 5px;
+  margin-right: 5px;
+  align-items: center;
+  font-size: smaller;
+  font-weight: 900;
+}
+
+.card-title h5 {
+  font-size: 1em;
+}
+
+.card-temp {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 5px;
+  margin-right: 5px;
+  align-items: center;
+}
+
+.main-temp {
+  font-size: 3em;
+  margin: 0;
+}
+
+.card-bottom {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.5em;
+  margin-right: 0.5em;
+}
+
+.delbtn {
+  background-color: rgb(230, 57, 70, 0.8);
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.delbtn:hover {
+  border: 1px solid white;
+  color: white;
+}

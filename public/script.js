@@ -51,12 +51,18 @@ function getCities() {
           let place_id = city.place_id;
           let cityCard = `
           <div class='city-card'>
-          <img src =${city.photo} width ="250" height = "250">
-          <p>${city.name}</p> <span>${currentWeather}</span>
-          <p>Low: ${temp_min}°</p>${current_temp}°</p><p>${temp_max}°</p>
-          <a>
-          <button class="delbtn" id ="${place_id}">X</button>
-          </div>     
+            <img class = 'card-img' src = ${city.photo} width ="250" height = "250">
+            <div class = 'card-title'>
+              <h5> ${city.name}</h5> <span>${currentWeather}</span>
+            </div>
+            <div class = 'card-temp'>
+              <p>Low: ${temp_min}°</p><p class='main-temp'>${current_temp}°</p><p>High: ${temp_max}°</p>
+            </div>
+            <div class = 'card-bottom'>
+              <button class="delbtn" id ="${place_id}">X</button>
+            </div>
+          </div>
+          <br />    
         `;
           cityCards.innerHTML += cityCard;
           let delbtns = document.querySelectorAll(".delbtn");
