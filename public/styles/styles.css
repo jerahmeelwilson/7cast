@@ -88,9 +88,22 @@ nav {
 
 .card-bottom {
   display: flex;
-  justify-content: flex-end;
-  margin-bottom: 0.5em;
+  justify-content: space-between;
+  margin-top: 0.5em;
+  margin-bottom: 0.8em;
   margin-right: 0.5em;
+}
+
+.seemore {
+  background-color: rgba(57, 83, 230, 0.3);
+  border-radius: 10px;
+  border: 1px solid black;
+  margin-left: 0.5em;
+}
+
+.seemore:hover {
+  border: 1px solid white;
+  color: white;
 }
 
 .delbtn {
@@ -102,4 +115,39 @@ nav {
 .delbtn:hover {
   border: 1px solid white;
   color: white;
+}
+
+.modal-bg {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s;
+}
+
+.bg-active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal {
+  position: relative;
+  background-color: white;
+  width: 30%;
+  height: 30%;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-weight: bold;
+  cursor: pointer;
 }

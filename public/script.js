@@ -2,7 +2,7 @@ console.log("test");
 const citySearch = document.querySelector("[data-city-search]");
 const searchBox = new google.maps.places.SearchBox(citySearch);
 const cityCards = document.getElementById("cityCards");
-
+const modal_bg = document.querySelector(".modal-bg");
 class City {
   constructor(place_id, name, latitude, longitude, photo) {
     this.place_id = place_id;
@@ -36,6 +36,7 @@ searchBox.addListener("places_changed", () => {
 
 function getCities() {
   cityCards.innerHTML = "";
+  let modals = [];
   axios.get(`http://localhost:4004/api/Cities/`).then((res) => {
     res.data.forEach((city) => {
       axios
@@ -59,15 +60,40 @@ function getCities() {
               <p>Low: ${temp_min}°</p><p class='main-temp'>${current_temp}°</p><p>High: ${temp_max}°</p>
             </div>
             <div class = 'card-bottom'>
+              <button class="seemore ${place_id}">See more</button>
               <button class="delbtn" id ="${place_id}">X</button>
             </div>
           </div>
           <br />    
         `;
+          let modal = `
+           <div class = "modal ${place_id}">
+            <p>${city.name}</p>
+            <span class = "modal-close">X</span>
+           </div>
+        `;
+          modals.push(modal);
           cityCards.innerHTML += cityCard;
           let delbtns = document.querySelectorAll(".delbtn");
           delbtns.forEach((btn) => {
             btn.addEventListener("click", deleteCity);
+          });
+          let seemoreBtns = document.querySelectorAll(".seemore");
+          seemoreBtns.forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+              e.preventDefault();
+              modal_bg.innerHTML = "";
+              modals.forEach((modal) => {
+                if (modal.includes(e.target.classList[1])) {
+                  modal_bg.innerHTML = modal;
+                  modal_bg.classList.add("bg-active");
+                  let modalClose = document.querySelector(".modal-close");
+                  modalClose.addEventListener("click", () => {
+                    modal_bg.classList.remove("bg-active");
+                  });
+                }
+              });
+            });
           });
         });
     });
