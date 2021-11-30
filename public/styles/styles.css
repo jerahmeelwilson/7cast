@@ -73,6 +73,11 @@ nav {
   font-size: 1em;
 }
 
+.card_current_weather{
+  display: flex;
+  align-items: center;
+}
+
 .card-temp {
   display: flex;
   justify-content: space-between;
@@ -81,11 +86,22 @@ nav {
   align-items: center;
 }
 
-.main-temp {
+.card_main-temp {
   font-size: 3em;
   margin: 0;
   padding-left: 0.4em;
 }
+
+.card_low_temp {
+  color: rgba(57, 83, 230);
+  font-size: 1.2em;
+}
+
+.card_high_temp {
+  color: rgb(230, 57, 70, 0.8);
+  font-size: 1.2em;
+}
+
 
 .card-bottom {
   display: flex;
