@@ -54,20 +54,19 @@ function getCities() {
           let temp_max = Math.round(onecallData.data.daily[0].temp.max);
           let place_id = city.place_id;
           let current_dt = onecallData.data.current.dt;
+          let current_sunrise = onecallData.data.current.sunrise;
           let current_sunset = onecallData.data.current.sunset;
+          let timezone = onecallData.data.timezone;
           let cityCard = `
           <div class='city-card'>
             <img class = 'card-img' src = ${
               city.photo
-            } width ="325" height = "325">
+            } width ="350" height = "350">
             <div class = 'card-title'>
               <h5> ${
                 city.name
-              }</h5> <div class ="card_current_weather"><span>${currentWeather}</span> ${getIcon(
-            currentWeather,
-            current_dt,
-            current_sunset,
-            currentWeather
+              }</h5> <div class ="card_current_weather"><span class="card_weather_main">${currentWeather}</span> ${getIcon(
+            onecallData.data.current.weather[0].icon
           )}</div>
             </div>
             <div class = 'card-temp'>
@@ -84,13 +83,50 @@ function getCities() {
           let dailyHTML = "";
           daily.forEach((day) => {
             dailyHTML += `<div>
-              <h5>${dtConvert(day.dt)}</h5> <p>${day.weather[0].description}</p>
+              <h5>pla</h5> <p>${day.weather[0].description}</p>
             </div>`;
           });
           let modal = `
            <div class = "modal ${place_id}">
-            <h5>${city.name}</h5>
-            ${dailyHTML}
+            <div class="modal_heading"> <h5>${city.name}</h5> <h5>${dtConvert(
+            current_dt,
+            timezone
+          )}</h5></div>
+          <div class ="current_weather_table">
+            <table>
+              <tr>
+                <th>Description:</th>
+                <td>${currentWeatherDesc}</td>
+              </tr> 
+              <tr>
+                <th>Wind Speed:</th>
+                <td>${onecallData.data.current.wind_speed} mph</td>
+              </tr>
+              <tr>
+                <th>Sunrise</th>
+                <td></td>
+              </tr>
+              <tr>
+                <th>Sunset</th>
+                <td></td>
+              </tr>
+              <tr>
+                <th>Humidity</th>
+                <td>${onecallData.data.current.humidity}%</td>
+              </tr>
+              <tr>
+                <th>Cloudiness:</th>
+                <td>${onecallData.data.current.clouds}%</td>
+              </tr>
+              <tr>
+                <th>UVI:</th>
+                <td>${onecallData.data.current.uvi}</td>
+              </tr>
+            </table>
+          </div>
+          <div class = "hourly_forecast_box">
+            
+          </div>
             <span class = "modal-close">X</span>
            </div>
         `;
@@ -130,16 +166,31 @@ function deleteCity(e) {
     .catch((err) => console.log(err));
 }
 
-function dtConvert(dt) {
+function dtConvert(dt, period, Timezone) {
+  let options = { timezone: Timezone, timezoneName: "long" };
   let date = new Date(dt * 1000);
-  return `${date.getMonth(date) + 1}/${date.getDate(date) + 1} `;
+  console.log(date.toLocaleDateString("en-US", options));
+}
+
+function hourlyforcast(hours, timezone) {
+  let hourlyForcast = ``;
+  hours.forEach((hour) => {
+    hourlyForcast += `
+    <div class ="hourly_div">
+    <h5>${dtConvert(hour.dt, "hour", timezone)}</h5>
+    ${getIcon(hour.weather[0].icon)}
+    <p>${Math.round(hour.temp)}°</p>
+    </div>  
+    `;
+  });
+  return hourlyForcast;
 }
 
 const weatherIcons = {
   clear_sky_day: `<img src="images/amcharts_weather_icons_1.0.0/animated/day.svg" alt="">`,
   clear_sky_night: `<img src="images/amcharts_weather_icons_1.0.0/animated/night.svg" alt="">`,
-  cloudy_day: `<img src="images/amcharts_weather_icons_1.0.0/animated/cloudy_day.svg" alt="">`,
-  cloudy_night: `<img src="images/amcharts_weather_icons_1.0.0/animated/cloudy_day.svg" alt="">`,
+  cloudy_day: `<img src="images/amcharts_weather_icons_1.0.0/animated/cloudy-day-3.svg" alt="">`,
+  cloudy_night: `<img src="images/amcharts_weather_icons_1.0.0/animated/cloudy-night-3.svg" alt="">`,
   cloudy: `<img src="images/amcharts_weather_icons_1.0.0/animated/cloudy.svg" alt="">`,
   drizzle: `<img src="images/amcharts_weather_icons_1.0.0/animated/rainy-1.svg" alt="">`,
   rain: `<img src="images/amcharts_weather_icons_1.0.0/animated/rainy-6.svg" alt="">`,
@@ -147,30 +198,22 @@ const weatherIcons = {
   thunder: `<img src="images/amcharts_weather_icons_1.0.0/animated/thunder.svg" alt="">`,
 };
 
-function getIcon(weather, current_time, sunset, description) {
-  if (weather == "Clear" && current_time < sunset) {
+function getIcon(iconId) {
+  if (iconId == "01d") {
     return weatherIcons.clear_sky_day;
-  } else if (weather == "Clear" && current_time > sunset) {
+  } else if (iconId == "01n") {
     return weatherIcons.clear_sky_night;
-  } else if (
-    weather == "Clouds" &&
-    description == "few clouds" &&
-    current_time < sunset
-  ) {
+  } else if (iconId == "02d") {
     return weatherIcons.cloudy_day;
-  } else if (
-    weather == "Clouds" &&
-    description == "few clouds" &&
-    current_time > sunset
-  ) {
+  } else if (iconId == "02n") {
     return weatherIcons.cloudy_night;
-  } else if (weather == "Drizzle") {
+  } else if (iconId == "09d") {
     return weatherIcons.drizzle;
-  } else if (weather == "Rain") {
+  } else if (iconId == "10d") {
     return weatherIcons.rain;
-  } else if (weather == "Thunderstorm") {
+  } else if (iconId == "11d") {
     return weatherIcons.thunder;
-  } else if (weather == "Snow") {
+  } else if (iconId == "13d") {
     return weatherIcons.snow;
   } else {
     return weatherIcons.cloudy;

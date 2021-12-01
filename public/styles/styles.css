@@ -73,9 +73,16 @@ nav {
   font-size: 1em;
 }
 
-.card_current_weather{
+.card_current_weather {
   display: flex;
   align-items: center;
+  position: relative;
+  left: 1em;
+}
+
+.card_weather_main {
+  position: relative;
+  left: 0.7em;
 }
 
 .card-temp {
@@ -101,7 +108,6 @@ nav {
   color: rgb(230, 57, 70, 0.8);
   font-size: 1.2em;
 }
-
 
 .card-bottom {
   display: flex;
@@ -167,4 +173,19 @@ nav {
   right: 10px;
   font-weight: bold;
   cursor: pointer;
+}
+
+.modal_heading {
+  display: flex;
+  justify-content: space-evenly;
+}
+.hourly_forecast_box {
+  display: flex;
+  overflow-x: auto;
+}
+
+.hourly_div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
