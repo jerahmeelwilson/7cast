@@ -1,5 +1,6 @@
 html {
   box-sizing: border-box;
+  
 }
 
 html:after {
@@ -77,12 +78,12 @@ nav {
   display: flex;
   align-items: center;
   position: relative;
-  left: 1em;
+  left: 0.9em;
 }
 
 .card_weather_main {
   position: relative;
-  left: 0.7em;
+  left: 0.6em;
 }
 
 .card-temp {
@@ -164,6 +165,7 @@ nav {
   position: relative;
   background-color: rgb(241, 250, 238);
   width: 30%;
+  height: 80%;
   border-radius: 10px;
 }
 
@@ -179,6 +181,22 @@ nav {
   display: flex;
   justify-content: space-evenly;
 }
+
+.current_weather_table{
+  width: 40%;
+  margin: 0 auto;
+}
+
+.current_weather_table th{
+  text-align: left;
+  position: relative;
+  right: 2em;
+}
+.current_weather_table td{
+  text-align: left;
+  position: relative;
+  left: 2em;
+}
 .hourly_forecast_box {
   display: flex;
   overflow-x: auto;
@@ -188,4 +206,42 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.daily_container{
+  width:100%;
+  height:40%;
+  overflow-y: auto;
+}
+
+.daily_forecast{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1em;
+}
+
+.daily_weather{
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 35%;
+}
+
+
+
+.daily_temp{
+  display:flex;
+}
+
+
+.daily_low_temp {
+  color: rgba(57, 83, 230);
+  font-size: 1.2em;
+  padding-right: 1em;
+}
+
+.daily_high_temp {
+  color: rgb(230, 57, 70, 0.8);
+  font-size: 1.2em;
 }

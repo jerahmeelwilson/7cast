@@ -80,18 +80,30 @@ function getCities() {
           <br />    
         `;
           let daily = onecallData.data.daily;
+          daily.shift();
           let dailyHTML = "";
           daily.forEach((day) => {
-            dailyHTML += `<div>
-              <h5>pla</h5> <p>${day.weather[0].description}</p>
+            dailyHTML += `<div class = "daily_forecast">
+              <h5>${dtConvertLocaleDate(day.dt, timezone).substring(
+                0,
+                10
+              )}</h5> 
+              <div class = 'daily_weather'>
+                <p>${day.weather[0].description}</p>
+                ${getIcon(day.weather[0].icon)}
+              </div>
+              <div class ="daily_temp">
+                    <p class="daily_low_temp">${Math.round(day.temp.min)}</p>
+                    <br />
+                    <p class="daily_high_temp">${Math.round(day.temp.max)}</p>                 
+              </div>
             </div>`;
           });
           let modal = `
            <div class = "modal ${place_id}">
-            <div class="modal_heading"> <h5>${city.name}</h5> <h5>${dtConvert(
-            current_dt,
-            timezone
-          )}</h5></div>
+            <div class="modal_heading"> <h5>${
+              city.name
+            }</h5> <h5>${dtConvertLocaleDate(current_dt, timezone)}</h5></div>
           <div class ="current_weather_table">
             <table>
               <tr>
@@ -103,12 +115,12 @@ function getCities() {
                 <td>${onecallData.data.current.wind_speed} mph</td>
               </tr>
               <tr>
-                <th>Sunrise</th>
-                <td></td>
+                <th>Sunrise:</th>
+                <td>${dtConvertLocaleTime(current_sunrise, timezone)}</td>
               </tr>
               <tr>
-                <th>Sunset</th>
-                <td></td>
+                <th>Sunset:</th>
+                <td>${dtConvertLocaleTime(current_sunset, timezone)}</td>
               </tr>
               <tr>
                 <th>Humidity</th>
@@ -125,8 +137,11 @@ function getCities() {
             </table>
           </div>
           <div class = "hourly_forecast_box">
-            
+          ${hourlyforcast(onecallData.data.hourly, timezone)}
           </div>
+          <div class = "daily_container">
+          ${dailyHTML}
+          <div>
             <span class = "modal-close">X</span>
            </div>
         `;
@@ -166,10 +181,36 @@ function deleteCity(e) {
     .catch((err) => console.log(err));
 }
 
-function dtConvert(dt, period, Timezone) {
-  let options = { timezone: Timezone, timezoneName: "long" };
+function dtConvertLocaleDate(dt, timezone) {
+  let options = {
+    weekday: "short",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  };
+  options.timeZone = timezone;
+  options.timeZoneName = 'short'
   let date = new Date(dt * 1000);
-  console.log(date.toLocaleDateString("en-US", options));
+  return (
+    date.toLocaleDateString("en-US", options) +
+    " " +
+    dtConvertLocaleTime(dt, timezone)
+  );
+}
+
+function dtConvertLocaleTime(dt, timezone) {
+  let options = { timeStyle: "short" };
+  options.timeZone = timezone;
+  let date = new Date(dt * 1000);
+  return date.toLocaleTimeString("en-US", options);
+}
+
+function dtConvertLocateTimeHour(dt, timezone) {
+  let date = new Date(dt * 1000);
+  return date.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    timeZone: timezone,
+  });
 }
 
 function hourlyforcast(hours, timezone) {
@@ -177,7 +218,7 @@ function hourlyforcast(hours, timezone) {
   hours.forEach((hour) => {
     hourlyForcast += `
     <div class ="hourly_div">
-    <h5>${dtConvert(hour.dt, "hour", timezone)}</h5>
+    <h5>${dtConvertLocateTimeHour(hour.dt, timezone)}</h5>
     ${getIcon(hour.weather[0].icon)}
     <p>${Math.round(hour.temp)}°</p>
     </div>  
