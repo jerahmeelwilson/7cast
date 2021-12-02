@@ -10,3 +10,17 @@ The main features of the application are:
 4. Allowing the user to see more detailed weather forecast information by clicking a button and displaying a popup with that detailed information.
 5. Allowing the user to delete a cities card from the page.
 
+APIs used:
+OpenWeatherMap API for weather forecast data
+Google Places API to get data on locations.
+
+Tech Stack:
+
+Frontend:
+HTML, Javascript, CSS, Axios
+
+Backend:
+Node, Express, Cors, Sequelize
+
+Database:
+PostgresSQL
